@@ -33,6 +33,8 @@ pub(crate) fn content(ui: &mut egui::Ui, data: &Data, reveal: &mut bool) {
     });
     ui.add_space(16.0);
     code(ui, &data.last_code, reveal);
+    ui.add_space(12.0);
+    status(ui, data);
     ui.add_space(18.0);
     ui.horizontal(|ui| {
         ui.label(egui::RichText::new("Console history").strong().size(16.0));
@@ -50,6 +52,83 @@ pub(crate) fn content(ui: &mut egui::Ui, data: &Data, reveal: &mut bool) {
             egui::ScrollArea::vertical()
                 .auto_shrink([false, false])
                 .show(ui, |ui| commands(ui, &data.history));
+        });
+}
+
+fn status(ui: &mut egui::Ui, data: &Data) {
+    ui.columns(2, |columns| {
+        card(&mut columns[0], |ui| steam(ui, data));
+        card(&mut columns[1], |ui| rust(ui, data));
+    });
+}
+
+fn card(ui: &mut egui::Ui, content: impl FnOnce(&mut egui::Ui)) {
+    egui::Frame::new()
+        .fill(PANEL)
+        .stroke(egui::Stroke::new(1.0, BORDER))
+        .corner_radius(8)
+        .inner_margin(14.0)
+        .show(ui, |ui| {
+            ui.set_min_width(ui.available_width());
+            ui.set_min_height(88.0);
+            content(ui);
+        });
+}
+
+fn steam(ui: &mut egui::Ui, data: &Data) {
+    ui.label(egui::RichText::new("Steam").strong().size(16.0));
+    ui.add_space(5.0);
+    let steam_id = data
+        .steam
+        .steam_id
+        .map_or("No active user".to_owned(), |id| id.to_string());
+    ui.label(egui::RichText::new(steam_id).monospace().size(15.0));
+    ui.add_space(8.0);
+    ui.horizontal(|ui| {
+        ui.weak("Last played");
+        ui.label(egui::RichText::new(&data.steam.last_game).strong());
+    });
+}
+
+fn rust(ui: &mut egui::Ui, data: &Data) {
+    ui.weak("Steam app 252490");
+    ui.label(egui::RichText::new(&data.rust.name).strong().size(20.0));
+    ui.add_space(10.0);
+    ui.horizontal(|ui| {
+        pill(
+            ui,
+            if data.rust.installed {
+                "Installed"
+            } else {
+                "Not installed"
+            },
+            data.rust.installed,
+        );
+        pill(
+            ui,
+            if data.rust.running {
+                "Running"
+            } else {
+                "Not running"
+            },
+            data.rust.running,
+        );
+    });
+}
+
+fn pill(ui: &mut egui::Ui, label: &str, active: bool) {
+    let (fill, text) = if active {
+        (ACCENT, egui::Color32::from_gray(18))
+    } else {
+        (SURFACE, egui::Color32::from_gray(175))
+    };
+    egui::Frame::new()
+        .fill(fill)
+        .stroke(egui::Stroke::new(1.0, BORDER))
+        .corner_radius(10)
+        .inner_margin(egui::Margin::symmetric(9, 4))
+        .show(ui, |ui| {
+            ui.label(egui::RichText::new(label).size(12.0).color(text));
         });
 }
 

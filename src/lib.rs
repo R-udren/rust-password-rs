@@ -10,6 +10,21 @@ use thiserror::Error;
 pub struct Data {
     pub history: Vec<String>,
     pub last_code: String,
+    pub steam: Steam,
+    pub rust: Game,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct Steam {
+    pub last_game: String,
+    pub steam_id: Option<u64>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct Game {
+    pub name: String,
+    pub installed: bool,
+    pub running: bool,
 }
 
 #[derive(Debug, Error)]
@@ -20,6 +35,20 @@ pub enum Error {
     Open(String),
     #[error("could not enumerate the Rust registry key: {0}")]
     Read(String),
+    #[error("could not open registry key '{path}': {reason}")]
+    OpenKey { path: &'static str, reason: String },
+    #[error("could not read registry value '{name}' from '{path}': {reason}")]
+    ReadValue {
+        path: &'static str,
+        name: &'static str,
+        reason: String,
+    },
+    #[error("registry value '{name}' from '{path}' must be 0 or 1, got {value}")]
+    InvalidFlag {
+        path: &'static str,
+        name: &'static str,
+        value: u32,
+    },
     #[error("registry value '{0}' was not found")]
     Missing(&'static str),
     #[error("multiple registry values matched '{0}'")]
@@ -68,6 +97,19 @@ fn text(name: &str, bytes: &[u8]) -> Result<String, Error> {
         })
 }
 
+fn steam_id(account_id: u32) -> Option<u64> {
+    const INDIVIDUAL_ACCOUNT_BASE: u64 = 76_561_197_960_265_728;
+    (account_id != 0).then(|| INDIVIDUAL_ACCOUNT_BASE + u64::from(account_id))
+}
+
+fn flag(path: &'static str, name: &'static str, value: u32) -> Result<bool, Error> {
+    match value {
+        0 => Ok(false),
+        1 => Ok(true),
+        value => Err(Error::InvalidFlag { path, name, value }),
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -85,5 +127,18 @@ mod tests {
         assert_eq!(text("code", b"7412\0").unwrap(), "7412");
         assert_eq!(text("code", b"7412").unwrap(), "7412");
         assert!(text("code", &[0xff, 0]).is_err());
+    }
+
+    #[test]
+    fn converts_account_id_to_steam_id_64() {
+        assert_eq!(steam_id(1_025_200_509), Some(76_561_198_985_466_237));
+        assert_eq!(steam_id(0), None);
+    }
+
+    #[test]
+    fn accepts_binary_registry_flags_only() {
+        assert!(!flag("key", "flag", 0).unwrap());
+        assert!(flag("key", "flag", 1).unwrap());
+        assert!(flag("key", "flag", 2).is_err());
     }
 }

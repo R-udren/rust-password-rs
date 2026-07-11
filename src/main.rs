@@ -11,6 +11,7 @@ fn main() -> eframe::Result<()> {
         .init();
 
     let options = eframe::NativeOptions {
+        renderer: eframe::Renderer::Glow,
         viewport: egui::ViewportBuilder::default()
             .with_inner_size([760.0, 600.0])
             .with_min_inner_size([560.0, 420.0]),
