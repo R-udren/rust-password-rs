@@ -31,9 +31,12 @@ impl eframe::App for App {
                 ui.add_space(16.0);
 
                 match &self.result {
-                    None => view::empty(ui),
-                    Some(Err(error)) => view::error(ui, error),
-                    Some(Ok(data)) => view::data(ui, data, &mut self.reveal),
+                    None => view::content(ui, None, &mut self.reveal),
+                    Some(Err(error)) => {
+                        view::error(ui, error);
+                        view::content(ui, None, &mut self.reveal);
+                    }
+                    Some(Ok(data)) => view::content(ui, Some(data), &mut self.reveal),
                 }
             });
     }
