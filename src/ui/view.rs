@@ -70,7 +70,7 @@ fn card(ui: &mut egui::Ui, content: impl FnOnce(&mut egui::Ui)) {
         .inner_margin(14.0)
         .show(ui, |ui| {
             ui.set_min_width(ui.available_width());
-            ui.set_min_height(88.0);
+            ui.set_height(96.0);
             content(ui);
         });
 }
@@ -78,22 +78,24 @@ fn card(ui: &mut egui::Ui, content: impl FnOnce(&mut egui::Ui)) {
 fn steam(ui: &mut egui::Ui, data: &Data) {
     ui.label(egui::RichText::new("Steam").strong().size(16.0));
     ui.add_space(5.0);
+    ui.label(
+        egui::RichText::new(&data.steam.last_game)
+            .strong()
+            .size(20.0),
+    );
+    ui.add_space(8.0);
     let steam_id = data
         .steam
         .steam_id
         .map_or("No active user".to_owned(), |id| id.to_string());
-    ui.label(egui::RichText::new(steam_id).monospace().size(15.0));
-    ui.add_space(8.0);
-    ui.horizontal(|ui| {
-        ui.weak("Last played");
-        ui.label(egui::RichText::new(&data.steam.last_game).strong());
-    });
+    ui.weak(egui::RichText::new(steam_id).monospace());
 }
 
 fn rust(ui: &mut egui::Ui, data: &Data) {
-    ui.weak("Steam app 252490");
+    ui.label(egui::RichText::new("Game").strong().size(16.0));
+    ui.add_space(5.0);
     ui.label(egui::RichText::new(&data.rust.name).strong().size(20.0));
-    ui.add_space(10.0);
+    ui.add_space(8.0);
     ui.horizontal(|ui| {
         pill(
             ui,
