@@ -24,20 +24,18 @@ impl eframe::App for App {
     fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
         egui::CentralPanel::default()
             .frame(egui::Frame::central_panel(ui.style()).inner_margin(20.0))
-            .show(ui, |ui| {
-                if view::header(ui) {
-                    self.scan();
-                }
-                ui.add_space(16.0);
-
-                match &self.result {
-                    None => view::content(ui, None, &mut self.reveal),
-                    Some(Err(error)) => {
-                        view::error(ui, error);
-                        view::content(ui, None, &mut self.reveal);
+            .show(ui, |ui| match &self.result {
+                None => {
+                    if view::scan(ui, None) {
+                        self.scan();
                     }
-                    Some(Ok(data)) => view::content(ui, Some(data), &mut self.reveal),
                 }
+                Some(Err(error)) => {
+                    if view::scan(ui, Some(error)) {
+                        self.scan();
+                    }
+                }
+                Some(Ok(data)) => view::content(ui, data, &mut self.reveal),
             });
     }
 }

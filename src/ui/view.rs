@@ -3,39 +3,38 @@ use rust_password::Data;
 
 use super::theme::{ACCENT, BORDER, COMMAND, PANEL, ROW, SURFACE};
 
-pub(crate) fn header(ui: &mut egui::Ui) -> bool {
+pub(crate) fn scan(ui: &mut egui::Ui, error: Option<&str>) -> bool {
     let mut scan = false;
-    ui.horizontal(|ui| {
-        ui.heading("Rust Password");
-
-        ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
+    ui.centered_and_justified(|ui| {
+        ui.vertical_centered(|ui| {
+            ui.heading("Rust Password");
+            ui.add_space(18.0);
+            if let Some(error) = error {
+                ui.colored_label(ui.visuals().error_fg_color, error);
+                ui.add_space(12.0);
+            }
             let text = egui::RichText::new("Scan")
                 .strong()
-                .size(15.0)
+                .size(18.0)
                 .color(egui::Color32::from_gray(18));
             let button = egui::Button::new(text)
                 .fill(ACCENT)
                 .stroke(egui::Stroke::NONE)
-                .min_size(egui::vec2(96.0, 38.0));
+                .min_size(egui::vec2(180.0, 54.0));
             scan = ui.add(button).clicked();
         });
     });
     scan
 }
 
-pub(crate) fn error(ui: &mut egui::Ui, error: &str) {
-    ui.colored_label(ui.visuals().error_fg_color, error);
-    ui.add_space(8.0);
-}
-
-pub(crate) fn content(ui: &mut egui::Ui, data: Option<&Data>, reveal: &mut bool) {
-    code(ui, data.map(|data| data.last_code.as_str()), reveal);
+pub(crate) fn content(ui: &mut egui::Ui, data: &Data, reveal: &mut bool) {
+    ui.heading("Rust Password");
+    ui.add_space(16.0);
+    code(ui, &data.last_code, reveal);
     ui.add_space(18.0);
     ui.horizontal(|ui| {
         ui.label(egui::RichText::new("Console history").strong().size(16.0));
-        if let Some(data) = data {
-            ui.weak(data.history.len().to_string());
-        }
+        ui.weak(data.history.len().to_string());
     });
     ui.add_space(8.0);
 
@@ -48,14 +47,11 @@ pub(crate) fn content(ui: &mut egui::Ui, data: Option<&Data>, reveal: &mut bool)
             ui.set_width(ui.available_width());
             egui::ScrollArea::vertical()
                 .auto_shrink([false, false])
-                .show(ui, |ui| match data {
-                    Some(data) => commands(ui, &data.history),
-                    None => placeholders(ui),
-                });
+                .show(ui, |ui| commands(ui, &data.history));
         });
 }
 
-fn code(ui: &mut egui::Ui, code: Option<&str>, reveal: &mut bool) {
+fn code(ui: &mut egui::Ui, code: &str, reveal: &mut bool) {
     egui::Frame::new()
         .fill(PANEL)
         .stroke(egui::Stroke::new(1.0, BORDER))
@@ -68,10 +64,7 @@ fn code(ui: &mut egui::Ui, code: Option<&str>, reveal: &mut bool) {
                 ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
                     let label = if *reveal { "Hide code" } else { "Reveal code" };
                     if ui
-                        .add_enabled(
-                            code.is_some(),
-                            egui::Button::new(label).min_size(egui::vec2(104.0, 30.0)),
-                        )
+                        .add(egui::Button::new(label).min_size(egui::vec2(104.0, 30.0)))
                         .clicked()
                     {
                         *reveal = !*reveal;
@@ -79,31 +72,15 @@ fn code(ui: &mut egui::Ui, code: Option<&str>, reveal: &mut bool) {
                 });
             });
             ui.add_space(8.0);
-            let mut value = code.unwrap_or_default().to_owned();
+            let mut value = code.to_owned();
             ui.add_sized(
                 [ui.available_width(), 36.0],
                 egui::TextEdit::singleline(&mut value)
                     .font(egui::TextStyle::Monospace)
-                    .hint_text("••••")
                     .password(!*reveal)
                     .interactive(false),
             );
         });
-}
-
-fn placeholders(ui: &mut egui::Ui) {
-    for width in [0.42, 0.68, 0.51, 0.76, 0.58, 0.36, 0.64] {
-        egui::Frame::new()
-            .fill(ROW)
-            .corner_radius(4)
-            .inner_margin(egui::Margin::symmetric(10, 7))
-            .show(ui, |ui| {
-                let size = egui::vec2(ui.available_width() * width, 14.0);
-                let (rect, _) = ui.allocate_exact_size(size, egui::Sense::hover());
-                ui.painter()
-                    .rect_filled(rect, 3, egui::Color32::from_gray(36));
-            });
-    }
 }
 
 fn commands(ui: &mut egui::Ui, history: &[String]) {
