@@ -28,7 +28,9 @@ pub(crate) fn scan(ui: &mut egui::Ui, error: Option<&str>) -> bool {
 }
 
 pub(crate) fn content(ui: &mut egui::Ui, data: &Data, reveal: &mut bool) {
-    ui.heading("Rust Password");
+    ui.vertical_centered(|ui| {
+        ui.heading("Rust Password");
+    });
     ui.add_space(16.0);
     code(ui, &data.last_code, reveal);
     ui.add_space(18.0);
@@ -59,27 +61,33 @@ fn code(ui: &mut egui::Ui, code: &str, reveal: &mut bool) {
         .inner_margin(14.0)
         .show(ui, |ui| {
             ui.set_width(ui.available_width());
-            ui.horizontal(|ui| {
+            ui.vertical_centered(|ui| {
                 ui.label(egui::RichText::new("Last code").strong().size(16.0));
-                ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
-                    let label = if *reveal { "Hide code" } else { "Reveal code" };
-                    if ui
-                        .add(egui::Button::new(label).min_size(egui::vec2(104.0, 30.0)))
-                        .clicked()
-                    {
-                        *reveal = !*reveal;
-                    }
-                });
             });
-            ui.add_space(8.0);
+            ui.add_space(10.0);
             let mut value = code.to_owned();
-            ui.add_sized(
-                [ui.available_width(), 36.0],
-                egui::TextEdit::singleline(&mut value)
-                    .font(egui::TextStyle::Monospace)
-                    .password(!*reveal)
-                    .interactive(false),
-            );
+            ui.horizontal(|ui| {
+                const FIELD_WIDTH: f32 = 120.0;
+                const BUTTON_WIDTH: f32 = 104.0;
+                let group_width = FIELD_WIDTH + BUTTON_WIDTH + ui.spacing().item_spacing.x;
+                ui.add_space(((ui.available_width() - group_width) / 2.0).max(0.0));
+                ui.add_sized(
+                    [FIELD_WIDTH, 42.0],
+                    egui::TextEdit::singleline(&mut value)
+                        .font(egui::FontId::monospace(22.0))
+                        .horizontal_align(egui::Align::Center)
+                        .vertical_align(egui::Align::Center)
+                        .password(!*reveal)
+                        .interactive(false),
+                );
+                let label = if *reveal { "Hide code" } else { "Reveal code" };
+                if ui
+                    .add(egui::Button::new(label).min_size(egui::vec2(BUTTON_WIDTH, 42.0)))
+                    .clicked()
+                {
+                    *reveal = !*reveal;
+                }
+            });
         });
 }
 
