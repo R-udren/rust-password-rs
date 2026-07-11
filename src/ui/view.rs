@@ -3,7 +3,7 @@ use rust_password::Data;
 
 use super::theme::{ACCENT, BORDER, COMMAND, PANEL, ROW, SURFACE};
 
-pub(crate) fn scan(ui: &mut egui::Ui, error: Option<&str>) -> bool {
+pub fn scan(ui: &mut egui::Ui, error: Option<&str>) -> bool {
     let mut scan = false;
     ui.centered_and_justified(|ui| {
         ui.vertical_centered(|ui| {
@@ -27,7 +27,7 @@ pub(crate) fn scan(ui: &mut egui::Ui, error: Option<&str>) -> bool {
     scan
 }
 
-pub(crate) fn content(ui: &mut egui::Ui, data: &Data, reveal: &mut bool) {
+pub fn content(ui: &mut egui::Ui, data: &Data, reveal: &mut bool) {
     ui.vertical_centered(|ui| {
         ui.heading("Rust Password");
     });
@@ -87,7 +87,7 @@ fn steam(ui: &mut egui::Ui, data: &Data) {
     let steam_id = data
         .steam
         .steam_id
-        .map_or("No active user".to_owned(), |id| id.to_string());
+        .map_or_else(|| "No active user".to_owned(), |id| id.to_string());
     ui.weak(egui::RichText::new(steam_id).monospace());
 }
 

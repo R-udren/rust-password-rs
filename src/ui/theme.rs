@@ -1,13 +1,13 @@
 use eframe::egui;
 
-pub(crate) const PANEL: egui::Color32 = egui::Color32::from_gray(25);
-pub(crate) const SURFACE: egui::Color32 = egui::Color32::from_gray(15);
-pub(crate) const BORDER: egui::Color32 = egui::Color32::from_gray(48);
-pub(crate) const ROW: egui::Color32 = egui::Color32::from_gray(22);
-pub(crate) const ACCENT: egui::Color32 = egui::Color32::from_gray(224);
-pub(crate) const COMMAND: egui::Color32 = egui::Color32::from_gray(220);
+pub const PANEL: egui::Color32 = egui::Color32::from_gray(25);
+pub const SURFACE: egui::Color32 = egui::Color32::from_gray(15);
+pub const BORDER: egui::Color32 = egui::Color32::from_gray(48);
+pub const ROW: egui::Color32 = egui::Color32::from_gray(22);
+pub const ACCENT: egui::Color32 = egui::Color32::from_gray(224);
+pub const COMMAND: egui::Color32 = egui::Color32::from_gray(220);
 
-pub(crate) fn configure(context: &egui::Context) {
+pub fn configure(context: &egui::Context) {
     let mut style = egui::Style::default();
     style.spacing.item_spacing = egui::vec2(10.0, 8.0);
     style.spacing.button_padding = egui::vec2(14.0, 8.0);

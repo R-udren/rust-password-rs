@@ -11,7 +11,7 @@ const RUST_APP_PATH: &str = r"Software\Valve\Steam\Apps\252490";
 const HISTORY: &str = "CONSOLE_HISTORY";
 const LAST_CODE: &str = "lastCodeEntered";
 
-pub(crate) fn scan() -> Result<Data, Error> {
+pub fn scan() -> Result<Data, Error> {
     let key = CURRENT_USER
         .open(RUST_PATH)
         .map_err(|error| Error::Open(error.to_string()))?;
@@ -23,9 +23,9 @@ pub(crate) fn scan() -> Result<Data, Error> {
     let mut last_code = None;
     for (name, value) in values {
         if matches(&name, HISTORY) {
-            insert(&mut history, HISTORY, name, value)?;
+            insert(&mut history, HISTORY, name, &value)?;
         } else if matches(&name, LAST_CODE) {
-            insert(&mut last_code, LAST_CODE, name, value)?;
+            insert(&mut last_code, LAST_CODE, name, &value)?;
         }
     }
 
@@ -102,7 +102,7 @@ fn insert(
     slot: &mut Option<(String, Vec<u8>)>,
     key: &'static str,
     name: String,
-    value: Value,
+    value: &Value,
 ) -> Result<(), Error> {
     if slot.is_some() {
         return Err(Error::Duplicate(key));

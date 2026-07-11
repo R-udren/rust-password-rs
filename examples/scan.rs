@@ -1,3 +1,5 @@
+//! Prints the registry scan as simple command-line output.
+
 fn main() {
     tracing_subscriber::fmt::init();
 

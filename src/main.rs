@@ -1,7 +1,8 @@
+//! Native GUI entry point.
+
 mod ui;
 
 #[path = "../branding.rs"]
-#[allow(dead_code)]
 mod branding;
 
 use eframe::egui;

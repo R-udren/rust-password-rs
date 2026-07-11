@@ -1,11 +1,11 @@
-pub(crate) mod theme;
+pub mod theme;
 mod view;
 
 use eframe::egui;
 use rust_password::Data;
 
 #[derive(Default)]
-pub(crate) struct App {
+pub struct App {
     result: Option<Result<Data, String>>,
     reveal: bool,
 }
