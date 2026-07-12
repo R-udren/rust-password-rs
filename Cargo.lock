@@ -1797,7 +1797,7 @@ dependencies = [
 
 [[package]]
 name = "rust-password"
-version = "0.1.2"
+version = "0.1.3"
 dependencies = [
  "eframe",
  "thiserror 2.0.18",
