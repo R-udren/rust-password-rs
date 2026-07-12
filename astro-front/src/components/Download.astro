@@ -22,6 +22,10 @@ const t = translations[lang];
         {t.download}
       </a>
       <p class="mt-4 text-sm text-[var(--color-text-muted)]">{t.downloadSubtext}</p>
+      <span class="mt-2 flex items-center justify-center gap-1 text-xs text-[var(--color-text-muted)] opacity-70">
+        <Download class="h-3 w-3" />
+        <span data-dl-count aria-label="download count">—</span> {t.downloadsLabel}
+      </span>
     </div>
   </div>
 </section>
