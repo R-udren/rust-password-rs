@@ -1,8 +1,6 @@
 //! Prints the registry scan as simple command-line output.
 
 fn main() {
-    tracing_subscriber::fmt::init();
-
     match rust_password::scan() {
         Ok(data) => {
             println!("Last code: {}", data.last_code);
@@ -22,7 +20,7 @@ fn main() {
             }
         }
         Err(error) => {
-            tracing::error!(%error, "scan failed");
+            eprintln!("scan failed: {error}");
             std::process::exit(1);
         }
     }

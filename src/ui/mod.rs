@@ -14,7 +14,7 @@ impl App {
     fn scan(&mut self) {
         self.reveal = false;
         self.result = Some(rust_password::scan().map_err(|error| {
-            tracing::error!(%error, "scan failed");
+            eprintln!("scan failed: {error}");
             error.to_string()
         }));
     }

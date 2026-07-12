@@ -111,7 +111,8 @@ fn insert(
         return Err(Error::WrongType { name });
     }
 
-    tracing::debug!(%name, bytes = value.len(), "found registry value");
+    #[cfg(debug_assertions)]
+    eprintln!("found registry value: {name} ({} bytes)", value.len());
     *slot = Some((name, value.to_vec()));
     Ok(())
 }
