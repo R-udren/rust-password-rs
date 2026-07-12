@@ -1,6 +1,6 @@
 ---
-import { Image } from 'astro:assets';
-import iconImg from '../assets/icon.png';
+import { Download, Languages } from '@lucide/astro';
+import GithubMark from './GithubMark.astro';
 import { translations, type Locale } from '../i18n/translations';
 interface Props { lang: Locale; }
 const { lang } = Astro.props;
@@ -12,20 +12,33 @@ const otherPath = lang === 'en' ? `${base}ru/` : base;
 ---
 <header class="header">
   <nav class="nav page" aria-label="Main navigation">
-    <a class="brand" href={homePath}><Image src={iconImg} alt="" width={24} height={24} /><span>{t.title}</span></a>
-    <div class="links"><a href="#features">{t.features}</a><a href="#privacy">{t.privacy}</a><a href="https://github.com/R-udren/rust-password-rs" target="_blank" rel="noopener noreferrer">GitHub</a></div>
-    <div class="actions"><a class="language" href={otherPath} onclick={`localStorage.setItem('lang','${otherLang}')`}>{t.language}</a><a class="download" href="https://github.com/R-udren/rust-password-rs/releases/latest/download/rust-password.exe">{t.download}</a></div>
+    <a class="brand" href={homePath}>
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span>{t.title}</span>
+    </a>
+    <div class="links">
+      <a href="#features">{t.features}</a>
+      <a href="#privacy">{t.privacy}</a>
+      <a href="https://github.com/R-udren/rust-password-rs" target="_blank" rel="noopener noreferrer"><GithubMark size={15} />{t.source}</a>
+    </div>
+    <div class="actions">
+      <a class="language" href={otherPath} onclick={`localStorage.setItem('lang','${otherLang}')`} aria-label={t.language}><Languages size={16} /><span>{t.language}</span></a>
+      <a class="download" href="https://github.com/R-udren/rust-password-rs/releases/latest/download/rust-password.exe"><Download size={15} /><span>{t.download}</span></a>
+    </div>
   </nav>
 </header>
 <style>
-  .header { position: absolute; z-index: 10; top: 16px; width: 100%; }
-  .nav { display: grid; grid-template-columns: 1fr auto 1fr; min-height: 58px; align-items: center; padding: 0 13px 0 16px; border: 1px solid var(--border); border-radius: 12px; background: rgba(7,7,9,.78); box-shadow: 0 14px 44px rgba(0,0,0,.25); backdrop-filter: blur(18px); }
-  .brand,.links,.actions { display: flex; align-items: center; }
-  .brand { gap: .65rem; font-size: .9rem; font-weight: 650; }
-  .brand :global(img) { border-radius: 5px; }
-  .links { gap: 1.8rem; color: #8c8992; font-size: .84rem; }
-  .actions { justify-content: end; gap: 1.1rem; color: #96929c; font-size: .84rem; }
-  .links a,.language { transition: color 150ms ease; }.links a:hover,.language:hover { color: var(--text); }
-  .download { padding: .55rem .75rem; border: 1px solid #cbc9ce; border-radius: 7px; color: #111114; background: #e6e5e8; font-weight: 600; }
-  @media (max-width: 760px) { .nav { grid-template-columns: 1fr auto; }.links { display: none; }.language { display: none; } }
+  .header { position: absolute; z-index: 10; top: 0; width: 100%; }
+  .nav { display: grid; grid-template-columns: 1fr auto 1fr; min-height: 76px; align-items: center; border-bottom: 1px solid var(--border); }
+  .brand,.links,.actions,.language,.download { display: flex; align-items: center; }
+  .brand { gap: .65rem; font-size: .92rem; font-weight: 650; letter-spacing: -.02em; }
+  .brand-mark { display: grid; grid-template-columns: repeat(2, 4px); grid-template-rows: repeat(2, 4px); gap: 2px; width: 26px; height: 26px; place-content: center; border: 1px solid var(--border-strong); border-radius: 6px; }
+  .brand-mark i { display: block; width: 4px; height: 4px; background: #d9d5e2; }.brand-mark i:last-child { grid-column: 1 / -1; width: 10px; background: var(--violet-soft); }
+  .links { gap: 1.8rem; color: #8f8c95; font-size: .85rem; }.links a { display: inline-flex; align-items: center; gap: .4rem; }
+  .actions { justify-content: end; gap: .65rem; }
+  .language { gap: .45rem; padding: .6rem .7rem; color: #98959e; font-size: .84rem; }
+  .download { gap: .5rem; padding: .62rem .8rem; border: 1px solid var(--border-strong); border-radius: 7px; color: #d8d6dc; background: #111114; font-size: .84rem; font-weight: 600; }
+  .links a,.language,.download { transition: color 150ms ease,border-color 150ms ease,background 150ms ease; }
+  .links a:hover,.language:hover { color: var(--text); }.download:hover { border-color: #45414c; background: #17171b; }
+  @media (max-width: 760px) { .nav { grid-template-columns: 1fr auto; }.links,.language span { display: none; }.language { padding-inline: .5rem; }.download span { max-width: 9rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } }
 </style>
