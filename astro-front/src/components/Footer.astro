@@ -12,7 +12,13 @@ const t = translations[lang];
 
 <footer class="border-t border-[var(--color-border)] px-6 py-8">
   <div class="mx-auto flex max-w-5xl flex-col items-center gap-4 sm:flex-row sm:justify-between">
-    <p class="text-sm text-[var(--color-text-muted)]">{t.footerText}</p>
+    <p class="flex items-center gap-1.5 text-sm text-[var(--color-text-muted)]">
+      {t.footerText}
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="inline-block h-4 w-4 fill-[var(--color-accent)] align-middle">
+        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+      </svg>
+      <span style="background: linear-gradient(90deg, #e85d2a, #ff8a50); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; user-select: all;">.insoulglobal</span>
+    </p>
     <a
       href="https://github.com/R-udren/rust-password-rs"
       target="_blank"
