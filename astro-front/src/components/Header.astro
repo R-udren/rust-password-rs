@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import iconImg from '../assets/icon.png';
 import { translations, type Locale } from '../i18n/translations';
 
 interface Props {
@@ -15,7 +17,7 @@ const otherPath = lang === 'en' ? `${base}ru/` : base;
 <nav class="fixed top-0 left-0 right-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-bg)]/80 backdrop-blur-md">
   <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
     <a href={base} class="flex items-center gap-2">
-      <img src={`${base}icon.png`} alt="Rust Password" class="h-8 w-8" />
+      <Image src={iconImg} alt="Rust Password" class="h-8 w-8" width={32} height={32} />
       <span class="text-lg font-semibold">{t.title}</span>
     </a>
     <a

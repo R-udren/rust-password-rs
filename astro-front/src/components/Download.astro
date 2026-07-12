@@ -1,5 +1,5 @@
 ---
-import { Download, Code2 } from 'lucide-astro';
+import { Download } from 'lucide-astro';
 import { translations, type Locale } from '../i18n/translations';
 
 interface Props {
@@ -15,20 +15,13 @@ const t = translations[lang];
     <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-10">
       <h2 class="mb-4 text-2xl font-bold">{t.title}</h2>
       <a
-        href="https://github.com/R-udren/rust-password-rs/releases/latest/download/RustPassword.exe"
-        class="mb-6 inline-flex items-center gap-2 rounded-lg bg-[var(--color-accent)] px-8 py-4 text-lg font-semibold text-white transition-all hover:bg-[var(--color-accent-hover)] hover:shadow-lg hover:shadow-orange-500/20"
+        href="https://github.com/R-udren/rust-password-rs/releases/latest/download/rust-password.exe"
+        class="inline-flex items-center gap-2 rounded-lg bg-[var(--color-accent)] px-8 py-4 text-lg font-semibold text-white transition-all hover:bg-[var(--color-accent-hover)] hover:shadow-lg hover:shadow-orange-500/20"
       >
         <Download class="h-5 w-5" />
         {t.download}
       </a>
-      <p class="mb-8 text-sm text-[var(--color-text-muted)]">{t.downloadSubtext}</p>
-
-      <div class="border-t border-[var(--color-border)] pt-6">
-        <div class="flex items-center justify-center gap-2 text-[var(--color-text-muted)]">
-          <Code2 class="h-4 w-4" />
-          <span class="text-sm">{t.cliDesc}</span>
-        </div>
-      </div>
+      <p class="mt-4 text-sm text-[var(--color-text-muted)]">{t.downloadSubtext}</p>
     </div>
   </div>
 </section>
