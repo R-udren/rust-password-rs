@@ -1,7 +1,8 @@
 export const translations = {
   en: {
     title: "Rust Pass Reveal",
-    tagline: "Find your last codelock code. Get back in game.",
+    tagline:
+      "Your last codelock code, console history, and Steam data in one place.",
     heroDescription:
       "A native Windows app that reads Rust and Steam data locally. No network. No telemetry.",
     download: "Download for Windows",
@@ -44,7 +45,8 @@ export const translations = {
   },
   ru: {
     title: "Rust Pass Reveal",
-    tagline: "Найдите последний код замка. Вернитесь в игру.",
+    tagline:
+      "Последний код замка, история консоли и данные Steam - в одном окне.",
     heroDescription:
       "Нативное Windows-приложение для локальных данных Rust и Steam. Без сети и телеметрии.",
     download: "Скачать для Windows",
