@@ -1,0 +1,33 @@
+---
+import { KeyRound, Terminal, User, Activity } from 'lucide-astro';
+import { translations, type Locale } from '../i18n/translations';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = translations[lang];
+
+const features = [
+  { icon: KeyRound, title: t.feature1Title, desc: t.feature1Desc },
+  { icon: Terminal, title: t.feature2Title, desc: t.feature2Desc },
+  { icon: User, title: t.feature3Title, desc: t.feature3Desc },
+  { icon: Activity, title: t.feature4Title, desc: t.feature4Desc },
+];
+---
+
+<section class="px-6 py-20">
+  <div class="mx-auto max-w-5xl">
+    <h2 class="mb-12 text-center text-3xl font-bold">{t.features}</h2>
+    <div class="grid gap-6 sm:grid-cols-2">
+      {features.map((f) => (
+        <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 transition-colors hover:border-[var(--color-accent)]/50">
+          <f.icon class="mb-3 h-8 w-8 text-[var(--color-accent)]" />
+          <h3 class="mb-2 text-lg font-semibold">{f.title}</h3>
+          <p class="text-[var(--color-text-muted)]">{f.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

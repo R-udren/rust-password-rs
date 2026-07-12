@@ -1,0 +1,28 @@
+---
+import { Shield, Feather } from 'lucide-astro';
+import { translations, type Locale } from '../i18n/translations';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = translations[lang];
+---
+
+<section class="px-6 py-20">
+  <div class="mx-auto max-w-5xl">
+    <div class="grid gap-6 sm:grid-cols-2">
+      <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-8">
+        <Shield class="mb-4 h-10 w-10 text-emerald-500" />
+        <h3 class="mb-2 text-xl font-semibold">{t.privacy}</h3>
+        <p class="text-[var(--color-text-muted)]">{t.privacyDesc}</p>
+      </div>
+      <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-8">
+        <Feather class="mb-4 h-10 w-10 text-sky-500" />
+        <h3 class="mb-2 text-xl font-semibold">{t.lightweight}</h3>
+        <p class="text-[var(--color-text-muted)]">{t.lightweightDesc}</p>
+      </div>
+    </div>
+  </div>
+</section>
