@@ -1,0 +1,31 @@
+name: Build & Release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Extract version from Cargo.toml
+        shell: bash
+        run: |
+          ver=$(grep -m1 '^version = ' Cargo.toml | cut -d'"' -f2)
+          echo "VERSION=$ver" >> $GITHUB_ENV
+          echo "Building v$ver"
+
+      - name: Build release
+        run: cargo build --release
+
+      - name: Create release and upload asset
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: v${{ env.VERSION }}
+          name: v${{ env.VERSION }}
+          files: target/release/rust-password.exe
+          generate_release_notes: true
