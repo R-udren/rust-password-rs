@@ -1,12 +1,10 @@
 ---
+import { Download, Languages } from '@lucide/astro';
 import { Image } from 'astro:assets';
 import iconImg from '../assets/icon.png';
+import GithubMark from './GithubMark.astro';
 import { translations, type Locale } from '../i18n/translations';
-
-interface Props {
-  lang: Locale;
-}
-
+interface Props { lang: Locale; }
 const { lang } = Astro.props;
 const t = translations[lang];
 const base = import.meta.env.BASE_URL;
@@ -14,19 +12,33 @@ const otherLang = lang === 'en' ? 'ru' : 'en';
 const homePath = lang === 'en' ? base : `${base}ru/`;
 const otherPath = lang === 'en' ? `${base}ru/` : base;
 ---
-
-<nav class="fixed top-0 left-0 right-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-bg)]/80 backdrop-blur-md">
-  <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-    <a href={homePath} class="flex items-center gap-2">
-      <Image src={iconImg} alt={t.title} class="h-8 w-8" width={32} height={32} />
-      <span class="text-lg font-semibold">{t.title}</span>
+<header class="header">
+  <nav class="nav page" aria-label="Main navigation">
+    <a class="brand" href={homePath}>
+      <Image class="brand-mark" src={iconImg} alt="" width={36} height={36} />
+      <span>{t.title}</span>
     </a>
-    <a
-      href={otherPath}
-      onclick={`localStorage.setItem('lang','${otherLang}')`}
-      class="rounded-md border border-[var(--color-border)] px-3 py-1.5 text-sm text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-text)]"
-    >
-      {t.language}
-    </a>
-  </div>
-</nav>
+    <div class="links">
+      <a href="#features">{t.features}</a>
+      <a href="https://github.com/R-udren/rust-password-rs" target="_blank" rel="noopener noreferrer"><GithubMark size={15} />{t.source}</a>
+    </div>
+    <div class="actions">
+      <a class="language" href={otherPath} onclick={`localStorage.setItem('lang','${otherLang}')`} aria-label={t.language}><Languages size={16} /><span>{t.language}</span></a>
+      <a class="download" href="https://github.com/R-udren/rust-password-rs/releases/latest/download/rust-password.exe"><Download size={15} /><span>{t.download}</span></a>
+    </div>
+  </nav>
+</header>
+<style>
+  .header { position: absolute; z-index: 10; top: 0; width: 100%; }
+  .nav { display: grid; grid-template-columns: 1fr auto 1fr; min-height: 76px; align-items: center; border-bottom: 1px solid var(--border); }
+  .brand,.links,.actions,.language,.download { display: flex; align-items: center; }
+  .brand { gap: .7rem; font-size: .92rem; font-weight: 650; letter-spacing: -.02em; }
+  .brand-mark { display: block; width: 36px; height: 36px; }
+  .links { gap: 1.8rem; color: #8f8c95; font-size: .85rem; }.links a { display: inline-flex; align-items: center; gap: .4rem; }
+  .actions { justify-content: end; gap: .65rem; }
+  .language { gap: .45rem; padding: .6rem .7rem; color: #98959e; font-size: .84rem; }
+  .download { gap: .5rem; padding: .62rem .8rem; border: 1px solid var(--border-strong); border-radius: 7px; color: #d8d6dc; background: #111114; font-size: .84rem; font-weight: 600; }
+  .links a,.language,.download { transition: color 150ms ease,border-color 150ms ease,background 150ms ease; }
+  .links a:hover,.language:hover { color: var(--text); }.download:hover { border-color: #45414c; background: #17171b; }
+  @media (max-width: 760px) { .nav { grid-template-columns: 1fr auto; }.links,.language span { display: none; }.language { padding-inline: .5rem; }.download span { max-width: 9rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } }
+</style>

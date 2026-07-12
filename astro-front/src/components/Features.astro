@@ -1,33 +1,30 @@
 ---
-import { KeyRound, Terminal, User, Activity } from '@lucide/astro';
+import { KeyRound, Terminal, UserRound, Activity } from '@lucide/astro';
 import { translations, type Locale } from '../i18n/translations';
-
-interface Props {
-  lang: Locale;
-}
-
+interface Props { lang: Locale; }
 const { lang } = Astro.props;
 const t = translations[lang];
-
 const features = [
   { icon: KeyRound, title: t.feature1Title, desc: t.feature1Desc },
   { icon: Terminal, title: t.feature2Title, desc: t.feature2Desc },
-  { icon: User, title: t.feature3Title, desc: t.feature3Desc },
+  { icon: UserRound, title: t.feature3Title, desc: t.feature3Desc },
   { icon: Activity, title: t.feature4Title, desc: t.feature4Desc },
 ];
 ---
-
-<section class="px-6 py-20">
-  <div class="mx-auto max-w-5xl">
-    <h2 class="mb-12 text-center text-3xl font-bold">{t.features}</h2>
-    <div class="grid gap-6 sm:grid-cols-2">
-      {features.map((f) => (
-        <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 transition-colors hover:border-[var(--color-accent)]/50">
-          <f.icon class="mb-3 h-8 w-8 text-[var(--color-accent)]" />
-          <h3 class="mb-2 text-lg font-semibold">{f.title}</h3>
-          <p class="text-[var(--color-text-muted)]">{f.desc}</p>
-        </div>
-      ))}
-    </div>
-  </div>
+<section id="features" class="features page" aria-labelledby="features-title">
+  <header><p class="label">{t.productOverview}</p><h2 id="features-title">{t.productHeading}<br /><span>{t.productHeadingAccent}</span></h2></header>
+  <div class="grid">{features.map((feature,index) => <article><div class="visual"><span>0{index + 1}</span><feature.icon size={34} stroke-width={1} /></div><h3>{feature.title}</h3><p>{feature.desc}</p></article>)}</div>
 </section>
+<style>
+  .features { padding: 118px 0 128px; }
+  header { display: grid; grid-template-columns: minmax(190px,.65fr) 2fr; align-items: start; gap: 2rem; margin-bottom: 75px; }
+  h2 { margin: 0; font-size: clamp(2rem,4vw,3.6rem); font-weight: 520; letter-spacing: -.045em; line-height: 1.12; } h2 span { color: #65636b; }
+  .grid { display: grid; grid-template-columns: repeat(4,1fr); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  article { min-width: 0; padding: 0 22px 30px; border-right: 1px solid var(--border); } article:first-child { padding-left: 0; } article:last-child { padding-right: 0; border-right: 0; }
+  .visual { position: relative; display: flex; height: 190px; align-items: center; justify-content: center; color: #57535f; }
+  .visual::before,.visual::after { position: absolute; border: 1px solid rgba(141,119,180,.13); content: ''; transform: rotate(45deg); }.visual::before { width: 76px; height: 76px; }.visual::after { width: 104px; height: 104px; opacity: .35; }
+  .visual span { position: absolute; top: 14px; left: 0; color: #595660; font-size: .72rem; }
+  h3 { margin: 0 0 .65rem; font-size: 1.05rem; font-weight: 600; } article p { margin: 0; color: #95919b; font-size: .94rem; line-height: 1.7; }
+  @media (max-width: 800px) { .grid { grid-template-columns: 1fr 1fr; } article:nth-child(2) { border-right: 0; } article:nth-child(-n+2) { border-bottom: 1px solid var(--border); } header { grid-template-columns: 1fr; gap: 1.3rem; } }
+  @media (max-width: 500px) { .grid { grid-template-columns: 1fr; } article { padding-inline: 0; border-right: 0; border-bottom: 1px solid var(--border); } article:last-child { border-bottom: 0; } }
+</style>
