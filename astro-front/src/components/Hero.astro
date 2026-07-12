@@ -3,54 +3,34 @@ import { Download } from '@lucide/astro';
 import { Image } from 'astro:assets';
 import previewImg from '../assets/preview.png';
 import { translations, type Locale } from '../i18n/translations';
-
-interface Props {
-  lang: Locale;
-}
-
+interface Props { lang: Locale; }
 const { lang } = Astro.props;
 const t = translations[lang];
 ---
-
-<section class="flex min-h-[80vh] flex-col items-center justify-center px-6 pt-24 text-center">
-  <h1 class="mb-4 max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-    {t.title}
-  </h1>
-
-  <p class="mb-8 max-w-2xl text-lg text-[var(--color-text-muted)] sm:text-xl">
-    {t.tagline}
-  </p>
-
-  <div class="flex flex-col items-center gap-3">
-    <a
-      href="https://github.com/R-udren/rust-password-rs/releases/latest/download/rust-password.exe"
-      class="inline-flex items-center gap-2 rounded-lg bg-[var(--color-accent)] px-6 py-3 text-base font-semibold text-white transition-all hover:bg-[var(--color-accent-hover)] hover:shadow-lg hover:shadow-orange-500/20"
-    >
-      <Download class="h-5 w-5" />
-      {t.download}
-    </a>
-    <span class="text-sm text-[var(--color-text-muted)]">
-      {t.downloadSubtext} ·{' '}
-      <a
-        href="https://github.com/R-udren/rust-password-rs"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="underline decoration-dotted underline-offset-2 hover:text-[var(--color-text)]"
-      >
-        {t.downloadSubtextLink}
-      </a>
-    </span>
+<section class="hero">
+  <div class="shader" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="hero-copy page">
+    <h1>{t.title}</h1>
+    <p class="tagline">{t.tagline}</p>
+    <div class="buttons"><a class="primary-button" href="https://github.com/R-udren/rust-password-rs/releases/latest/download/rust-password.exe"><Download size={16} />{t.download}</a><a class="secondary-button" href="https://github.com/R-udren/rust-password-rs" target="_blank" rel="noopener noreferrer">{t.source} ↗</a></div>
+    <p class="meta">{t.downloadSubtext}</p>
   </div>
-
-  <div class="mt-12 w-full max-w-4xl overflow-hidden rounded-xl border border-[var(--color-border)] shadow-2xl shadow-black/50">
-    <Image
-      src={previewImg}
-      alt={t.previewAlt}
-      class="w-full"
-      widths={[640, 960, 1280, 1920]}
-      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 75vw, 50vw"
-      loading="eager"
-      decoding="async"
-    />
-  </div>
+  <figure class="preview page"><Image src={previewImg} alt={t.previewAlt} widths={[480,640,820]} sizes="(max-width: 760px) calc(100vw - 28px), 820px" loading="eager" decoding="async" /></figure>
 </section>
+<style>
+  .hero { position: relative; overflow: hidden; padding: 168px 0 88px; border-bottom: 1px solid var(--border); isolation: isolate; }
+  .hero-copy { position: relative; z-index: 2; display: flex; align-items: center; flex-direction: column; text-align: center; }
+  h1 { max-width: 850px; margin: 0; font-size: clamp(3.3rem, 7vw, 6.8rem); font-weight: 550; letter-spacing: -.065em; line-height: .98; }
+  .tagline { max-width: 670px; margin: 1.4rem 0 0; color: #a5a2aa; font-size: clamp(1.05rem, 1.7vw, 1.2rem); line-height: 1.6; }
+  .buttons { display: flex; gap: .65rem; margin-top: 1.8rem; }
+  .meta { margin: 1rem 0 0; color: #87838d; font-size: .875rem; }
+  .preview { position: relative; z-index: 2; width: min(820px, calc(100% - 40px)); margin-top: 78px; padding: 0; overflow: hidden; border: 1px solid var(--border-strong); border-radius: 10px; background: #08080a; box-shadow: 0 36px 110px rgba(0,0,0,.75), 0 0 80px rgba(91,59,143,.15); }
+  .preview :global(img) { display: block; width: 100%; height: auto; }
+  .shader { position: absolute; z-index: -1; top: 230px; left: 50%; width: 1800px; height: 900px; opacity: .95; transform: translateX(-50%); }
+  .shader::before { position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(ellipse, rgba(83,54,129,.34), rgba(42,27,68,.14) 46%, transparent 74%); filter: blur(54px); content: ''; }
+  .shader i { position: absolute; top: 25%; left: 0; width: 100%; height: 13%; border-radius: 50%; background: linear-gradient(90deg, transparent 2%, rgba(48,31,76,.14) 16%, rgba(123,80,184,.52) 48%, rgba(72,43,112,.22) 78%, transparent 98%); filter: blur(34px); transform: rotate(-11deg); animation: drift 15s ease-in-out infinite alternate; }
+  .shader i:nth-child(2) { top: 48%; left: 9%; width: 84%; opacity: .78; transform: rotate(8deg); animation-delay: -5s; }
+  .shader i:nth-child(3) { top: 67%; left: 19%; width: 62%; opacity: .55; transform: rotate(-4deg); animation-delay: -10s; }
+  @keyframes drift { to { transform: translate3d(0, 12px, 0) rotate(-3deg) scaleX(1.03); } }
+  @media (max-width: 760px) { .hero { min-height: auto; padding-top: 145px; }.preview { width: calc(100% - 28px); margin-top: 68px; }.shader { top: 260px; width: 1150px; height: 720px; }.buttons { align-items: stretch; flex-direction: column; width: min(310px,100%); } }
+</style>

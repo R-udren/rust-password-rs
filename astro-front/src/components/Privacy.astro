@@ -1,28 +1,17 @@
 ---
-import { Shield, Feather } from '@lucide/astro';
+import { ShieldCheck, Feather } from '@lucide/astro';
 import { translations, type Locale } from '../i18n/translations';
-
-interface Props {
-  lang: Locale;
-}
-
+interface Props { lang: Locale; }
 const { lang } = Astro.props;
 const t = translations[lang];
 ---
-
-<section class="px-6 py-20">
-  <div class="mx-auto max-w-5xl">
-    <div class="grid gap-6 sm:grid-cols-2">
-      <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-8">
-        <Shield class="mb-4 h-10 w-10 text-emerald-500" />
-        <h3 class="mb-2 text-xl font-semibold">{t.privacy}</h3>
-        <p class="text-[var(--color-text-muted)]">{t.privacyDesc}</p>
-      </div>
-      <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-8">
-        <Feather class="mb-4 h-10 w-10 text-sky-500" />
-        <h3 class="mb-2 text-xl font-semibold">{t.lightweight}</h3>
-        <p class="text-[var(--color-text-muted)]">{t.lightweightDesc}</p>
-      </div>
-    </div>
-  </div>
-</section>
+<section id="privacy" class="privacy"><div class="page inner"><header><p class="label">{t.localDesign}</p><h2>{t.privacyHeading}<br /><span>{t.privacyHeadingAccent}</span></h2></header><div class="points"><article><ShieldCheck size={22} stroke-width={1.4} /><div><h3>{t.privacy}</h3><p>{t.privacyDesc}</p></div></article><article><Feather size={22} stroke-width={1.4} /><div><h3>{t.lightweight}</h3><p>{t.lightweightDesc}</p></div></article></div></div></section>
+<style>
+  .privacy { border-block: 1px solid var(--border); background: #070708; }
+  .inner { display: grid; grid-template-columns: 1.1fr .9fr; gap: 90px; padding-block: 112px; }
+  h2 { margin: 1.25rem 0 0; font-size: clamp(2.2rem,4.4vw,4rem); font-weight: 520; letter-spacing: -.05em; line-height: 1.08; } h2 span { color: #5f5d64; }
+  .points { border-top: 1px solid var(--border); }
+  article { display: grid; grid-template-columns: 34px 1fr; gap: 1rem; padding: 30px 0; border-bottom: 1px solid var(--border); } article :global(svg) { color: #796b99; }
+  h3 { margin: 0 0 .6rem; font-size: 1.05rem; } article p { margin: 0; color: #97939d; font-size: .95rem; line-height: 1.72; }
+  @media (max-width: 760px) { .inner { grid-template-columns: 1fr; gap: 60px; padding-block: 100px; } }
+</style>

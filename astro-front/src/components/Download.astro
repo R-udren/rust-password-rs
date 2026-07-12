@@ -1,41 +1,16 @@
 ---
 import { Download } from '@lucide/astro';
 import { translations, type Locale } from '../i18n/translations';
-
-interface Props {
-  lang: Locale;
-}
-
+interface Props { lang: Locale; }
 const { lang } = Astro.props;
 const t = translations[lang];
 ---
-
-<section class="px-6 py-20">
-  <div class="mx-auto max-w-3xl text-center">
-    <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-10">
-      <h2 class="mb-4 text-2xl font-bold">{t.title}</h2>
-      <a
-        href="https://github.com/R-udren/rust-password-rs/releases/latest/download/rust-password.exe"
-        class="inline-flex items-center gap-2 rounded-lg bg-[var(--color-accent)] px-8 py-4 text-lg font-semibold text-white transition-all hover:bg-[var(--color-accent-hover)] hover:shadow-lg hover:shadow-orange-500/20"
-      >
-        <Download class="h-5 w-5" />
-        {t.download}
-      </a>
-      <p class="mt-4 text-sm text-[var(--color-text-muted)]">
-        {t.downloadSubtext} ·{' '}
-        <a
-          href="https://github.com/R-udren/rust-password-rs"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="underline decoration-dotted underline-offset-2 hover:text-[var(--color-text)]"
-        >
-          {t.downloadSubtextLink}
-        </a>
-      </p>
-      <span class="mt-2 flex items-center justify-center gap-1 text-xs text-[var(--color-text-muted)] opacity-70">
-        <Download class="h-3 w-3" />
-        <span data-dl-count aria-label="download count">—</span> {t.downloadsLabel}
-      </span>
-    </div>
-  </div>
-</section>
+<section class="download page"><div class="glow" aria-hidden="true"></div><p class="label">{t.getStarted}</p><h2>{t.downloadHeading}<br />{t.downloadHeadingAccent}</h2><p class="summary">{t.heroDescription}</p><a class="primary-button" href="https://github.com/R-udren/rust-password-rs/releases/latest/download/rust-password.exe"><Download size={16} />{t.download}</a><p class="meta">{t.downloadSubtext} · <span data-dl-count aria-label="download count">—</span> {t.downloadsLabel}</p></section>
+<style>
+  .download { position: relative; overflow: hidden; padding: 190px clamp(24px,6vw,76px) 205px; text-align: center; }
+  .glow { position: absolute; z-index: -1; top: 24%; left: 50%; width: min(960px,120vw); height: 360px; border-radius: 50%; background: rgba(79,58,115,.13); filter: blur(95px); transform: translateX(-50%); }
+  h2 { max-width: 900px; margin: 1.65rem auto 1.45rem; font-size: clamp(2.7rem,6vw,5.5rem); font-weight: 520; letter-spacing: -.06em; line-height: 1.04; }
+  .summary { max-width: 620px; margin: 0 auto 2.35rem; color: #aaa6b0; font-size: 1rem; line-height: 1.8; }
+  .meta { margin-top: 1.15rem; color: #85818b; font-size: .875rem; }
+  @media (max-width: 600px) { .download { padding-block: 145px 160px; } h2 { margin-top: 1.4rem; } }
+</style>
