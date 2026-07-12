@@ -20,7 +20,6 @@ const otherPath = lang === 'en' ? `${base}ru/` : base;
     </a>
     <div class="links">
       <a href="#features">{t.features}</a>
-      <a href="https://github.com/R-udren/rust-password-rs" target="_blank" rel="noopener noreferrer"><GithubMark size={15} />{t.source}</a>
     </div>
     <div class="actions">
       <a class="language" href={otherPath} onclick={`localStorage.setItem('lang','${otherLang}')`} aria-label={t.language}><Languages size={16} /><span>{t.language}</span></a>
