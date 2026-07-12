@@ -1,7 +1,7 @@
 //! Embeds Windows branding and version information in the executable.
 
-const PRODUCT: &str = "Rust Password";
-const DESCRIPTION: &str = "Rust registry and Steam status viewer";
+const PRODUCT: &str = "Rust Pass Reveal";
+const DESCRIPTION: &str = "Rust game Codelock Revealer.";
 const COMPANY: &str = ".insoulglobal";
 const COPYRIGHT: &str = "Copyright © 2026 .insoulglobal";
 const EXE_NAME: &str = "rust-password.exe";

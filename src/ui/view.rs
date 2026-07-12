@@ -7,7 +7,7 @@ pub fn scan(ui: &mut egui::Ui, error: Option<&str>) -> bool {
     let mut scan = false;
     ui.centered_and_justified(|ui| {
         ui.vertical_centered(|ui| {
-            ui.heading("Rust Password");
+            ui.heading("Rust Pass Reveal");
             ui.add_space(18.0);
             if let Some(error) = error {
                 ui.colored_label(ui.visuals().error_fg_color, error);
@@ -29,7 +29,7 @@ pub fn scan(ui: &mut egui::Ui, error: Option<&str>) -> bool {
 
 pub fn content(ui: &mut egui::Ui, data: &Data, reveal: &mut bool) {
     ui.vertical_centered(|ui| {
-        ui.heading("Rust Password");
+        ui.heading("Rust Pass Reveal");
     });
     ui.add_space(16.0);
     code(ui, &data.last_code, reveal);

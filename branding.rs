@@ -1,4 +1,4 @@
-pub const PRODUCT: &str = "Rust Password";
+pub const PRODUCT: &str = "Rust Pass Reveal";
 
 pub const ICON_SIZE: u32 = 32;
 
