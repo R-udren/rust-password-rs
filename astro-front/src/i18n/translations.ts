@@ -1,20 +1,19 @@
 export const translations = {
   en: {
-    title: "Rust Password",
-    tagline:
-      "Reveal your last codelock code, command history, and Steam info - instantly.",
+    title: "Rust Pass Reveal",
+    tagline: "Find your last codelock code. Get back in game.",
     heroDescription:
-      "A lightweight, native Windows tool for Rust players. Zero network, zero telemetry. Your data stays on your machine.",
+      "A native Windows app that reads Rust and Steam data locally. No network. No telemetry.",
     download: "Download for Windows",
-    downloadSubtext: "Free · No install required",
-    downloadSubtextLink: "Open source on GitHub",
-    heroSourceLink: "Open Source",
+    downloadFree: "Free",
+    downloadNoInstall: "No install required",
+    heroSourceLink: "GitHub",
     openSource: "Open source",
     backToTop: "Back to top",
     features: "Features",
     feature1Title: "Last Codelock Code",
     feature1Desc:
-      "Reveal the last 4-digit code from any codelock you entered, hidden behind a privacy toggle.",
+      "See the last four-digit code you entered. Reveal it only when you choose.",
     feature2Title: "Command History",
     feature2Desc:
       "Browse every console command you typed in-game, newest first.",
@@ -26,39 +25,37 @@ export const translations = {
       "Check if Rust is installed and whether it's currently running.",
     privacy: "Privacy First",
     privacyDesc:
-      "Reads only your local Windows registry. Never modifies anything, never connects to the internet, no telemetry, no tracking.",
+      "Reads local Windows registry data. Never changes it or sends it anywhere.",
     lightweight: "Lightweight",
     lightweightDesc:
       "Single .exe, tiny footprint, native Windows app. No Electron, no bloat.",
-    previewAlt: "Rust Password app preview",
+    previewAlt: "Rust Pass Reveal app preview",
     language: "Русский",
     source: "View source",
     productOverview: "Product overview",
     productHeading: "Everything Rust remembers.",
     productHeadingAccent: "Visible in one scan.",
     localDesign: "Local by design",
-    privacyHeading: "Reads your registry.",
+    privacyHeading: "Reads the registry.",
     privacyHeadingAccent: "Nothing leaves your PC.",
-    getStarted: "Get started",
-    downloadHeading: "Find the code.",
-    downloadHeadingAccent: "Get back in game."
+    getStarted: "Download",
+    downloadHeading: "Rust data.",
+    downloadHeadingAccent: "Kept local."
   },
   ru: {
-    title: "Rust Password",
-    tagline:
-      "Последний код замка, история консоли и данные Steam — в одном окне.",
+    title: "Rust Pass Reveal",
+    tagline: "Найдите последний код замка. Вернитесь в игру.",
     heroDescription:
-      "Нативное приложение для Windows: читает данные Rust и Steam только на вашем компьютере. Без сети и телеметрии.",
+      "Нативное Windows-приложение для локальных данных Rust и Steam. Без сети и телеметрии.",
     download: "Скачать для Windows",
-    downloadSubtext: "Бесплатно · Без установки",
-    downloadSubtextLink: "Открытый исходный код на GitHub",
-    heroSourceLink: "Open Source",
+    downloadFree: "Бесплатно",
+    downloadNoInstall: "Без установки",
+    heroSourceLink: "GitHub",
     openSource: "Открытый исходный код",
     backToTop: "Наверх",
     features: "Возможности",
     feature1Title: "Последний код замка",
-    feature1Desc:
-      "Узнайте последние 4 цифры кода с любого замка, который вы вводили - скрыто переключателем приватности.",
+    feature1Desc: "Показывает последние четыре цифры введённого кода.",
     feature2Title: "История команд",
     feature2Desc:
       "Просматривайте все консольные команды, введённые в игре, от новых к старым.",
@@ -69,22 +66,22 @@ export const translations = {
       "Проверьте, установлен ли Rust и запущен ли он в данный момент.",
     privacy: "Приватность прежде всего",
     privacyDesc:
-      "Читает только локальный реестр Windows. Ничего не изменяет, не подключается к интернету, без телеметрии и слежки.",
+      "Читает локальные данные из реестра Windows. Ничего не меняет и не отправляет в сеть.",
     lightweight: "Лёгкость",
     lightweightDesc:
-      "Один .exe, минимальный размер, нативное Windows-приложение. Без Electron, без лишнего.",
-    previewAlt: "Превью приложения Rust Password",
+      "Один .exe. Нативное Windows-приложение без Electron и лишнего.",
+    previewAlt: "Превью приложения Rust Pass Reveal",
     language: "English",
     source: "Исходный код",
     productOverview: "Обзор приложения",
     productHeading: "Всё, что запоминает Rust.",
-    productHeadingAccent: "Доступно за одно сканирование.",
+    productHeadingAccent: "За одно сканирование.",
     localDesign: "Локально по умолчанию",
     privacyHeading: "Читает реестр.",
-    privacyHeadingAccent: "Данные не покидают ваш ПК.",
-    getStarted: "Начать",
-    downloadHeading: "Найдите код.",
-    downloadHeadingAccent: "Вернитесь в игру."
+    privacyHeadingAccent: "Данные остаются на ПК.",
+    getStarted: "Скачать",
+    downloadHeading: "Данные Rust.",
+    downloadHeadingAccent: "Локально."
   }
 } as const;
 
