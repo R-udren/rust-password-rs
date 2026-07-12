@@ -21,7 +21,17 @@ const t = translations[lang];
         <Download class="h-5 w-5" />
         {t.download}
       </a>
-      <p class="mt-4 text-sm text-[var(--color-text-muted)]">{t.downloadSubtext}</p>
+      <p class="mt-4 text-sm text-[var(--color-text-muted)]">
+        {t.downloadSubtext} ·{' '}
+        <a
+          href="https://github.com/R-udren/rust-password-rs"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline decoration-dotted underline-offset-2 hover:text-[var(--color-text)]"
+        >
+          {t.downloadSubtextLink}
+        </a>
+      </p>
       <span class="mt-2 flex items-center justify-center gap-1 text-xs text-[var(--color-text-muted)] opacity-70">
         <Download class="h-3 w-3" />
         <span data-dl-count aria-label="download count">—</span> {t.downloadsLabel}

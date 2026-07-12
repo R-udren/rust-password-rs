@@ -29,7 +29,17 @@ const t = translations[lang];
       <Download class="h-5 w-5" />
       {t.download}
     </a>
-    <span class="text-sm text-[var(--color-text-muted)]">{t.downloadSubtext}</span>
+    <span class="text-sm text-[var(--color-text-muted)]">
+      {t.downloadSubtext} ·{' '}
+      <a
+        href="https://github.com/R-udren/rust-password-rs"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="underline decoration-dotted underline-offset-2 hover:text-[var(--color-text)]"
+      >
+        {t.downloadSubtextLink}
+      </a>
+    </span>
   </div>
 
   <div class="mt-12 w-full max-w-4xl overflow-hidden rounded-xl border border-[var(--color-border)] shadow-2xl shadow-black/50">
