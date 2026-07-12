@@ -19,6 +19,11 @@
 * { box-sizing: border-box; }
 html { background: var(--bg); scroll-behavior: smooth; }
 body { min-width: 320px; margin: 0; overflow-x: hidden; color: var(--text); background: var(--bg); font-family: var(--font); text-rendering: optimizeLegibility; }
+html { scrollbar-color: #3d3a43 #09090b; scrollbar-width: thin; }
+::-webkit-scrollbar { width: 11px; }
+::-webkit-scrollbar-track { background: #09090b; }
+::-webkit-scrollbar-thumb { border: 3px solid #09090b; border-radius: 999px; background: #3d3a43; }
+::-webkit-scrollbar-thumb:hover { background: #5a5561; }
 a { color: inherit; text-decoration: none; }
 .page { width: var(--page); margin-inline: auto; }
 .label {

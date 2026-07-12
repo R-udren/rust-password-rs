@@ -13,13 +13,15 @@ const t = translations[lang];
     <a class="footer-brand" href="#"><Image src={iconImg} alt="" width={30} height={30} /><span><strong>{t.title}</strong></span></a>
     <div class="footer-actions"><a class="github" href="https://github.com/R-udren/rust-password-rs" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><GithubMark size={19} /><span>GitHub</span></a><a class="top" href="#"><span>{t.backToTop}</span><ArrowUp size={15} /></a></div>
   </div>
+  <a class="rchecker" href="https://rchecker.com/" target="_blank" rel="noopener noreferrer"><img src="/rchecker.svg" alt="" width="20" height="20" />{t.rchecker}</a>
 </footer>
 <style>
-  footer { border-top: 1px solid var(--border); background: #060607; }
-  .footer-main { display: flex; min-height: 130px; align-items: center; justify-content: space-between; }
+  footer { position: relative; border-top: 1px solid var(--border); background: #060607; }
+  .footer-main { display: flex; min-height: 104px; align-items: center; justify-content: space-between; }
   .footer-brand,.footer-brand span,.footer-actions,.footer-actions a { display: flex; }
   .footer-brand { align-items: center; gap: .75rem; }.footer-brand :global(img) { border-radius: 6px; }
   .footer-brand > span:last-child { align-items: flex-start; flex-direction: column; gap: .18rem; }.footer-brand strong { font-size: .9rem; letter-spacing: -.02em; }.footer-brand small { color: #74717a; font-size: .76rem; }
   .footer-actions { align-items: center; justify-content: end; gap: 1.15rem; }.footer-actions a { align-items: center; gap: .45rem; color: #98959e; font-size: .82rem; transition: color 150ms ease; }.footer-actions a:hover { color: var(--text); }.github svg { color: #f0eff2; }.top { color: #7f7b85 !important; }.top:hover { color: var(--text) !important; }
+  .rchecker { position: absolute; top: 50%; left: 50%; display: flex; align-items: center; gap: .6rem; color: #77747c; font-size: .8rem; transform: translate(-50%, -50%); transition: color 150ms ease; }.rchecker img { opacity: .78; transition: opacity 150ms ease; }.rchecker:hover { color: #d9d7dc; }.rchecker:hover img { opacity: 1; }
   @media (max-width: 560px) { .footer-main { align-items: flex-between; flex-direction: column; gap: 1.4rem; padding-block: 2.2rem; }.footer-actions { justify-content: start; } }
 </style>
