@@ -1,1 +1,6 @@
 /target
+
+# Landing page
+astro-front/node_modules/
+astro-front/dist/
+astro-front/.astro/

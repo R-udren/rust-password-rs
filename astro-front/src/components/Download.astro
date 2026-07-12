@@ -1,0 +1,27 @@
+---
+import { Download } from 'lucide-astro';
+import { translations, type Locale } from '../i18n/translations';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = translations[lang];
+---
+
+<section class="px-6 py-20">
+  <div class="mx-auto max-w-3xl text-center">
+    <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-10">
+      <h2 class="mb-4 text-2xl font-bold">{t.title}</h2>
+      <a
+        href="https://github.com/R-udren/rust-password-rs/releases/latest/download/rust-password.exe"
+        class="inline-flex items-center gap-2 rounded-lg bg-[var(--color-accent)] px-8 py-4 text-lg font-semibold text-white transition-all hover:bg-[var(--color-accent-hover)] hover:shadow-lg hover:shadow-orange-500/20"
+      >
+        <Download class="h-5 w-5" />
+        {t.download}
+      </a>
+      <p class="mt-4 text-sm text-[var(--color-text-muted)]">{t.downloadSubtext}</p>
+    </div>
+  </div>
+</section>
