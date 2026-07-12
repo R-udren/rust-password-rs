@@ -22,6 +22,7 @@ const otherPath = lang === 'en' ? `${base}ru/` : base;
     </a>
     <a
       href={otherPath}
+      onclick={`localStorage.setItem('lang','${otherLang}')`}
       class="rounded-md border border-[var(--color-border)] px-3 py-1.5 text-sm text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-text)]"
     >
       {t.language}
