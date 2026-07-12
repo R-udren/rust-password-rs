@@ -1,43 +1,47 @@
-# Astro Starter Kit: Minimal
+# Rust Password Landing Page
+
+Astro-based landing page for [Rust Password](https://pass.rchecker.com/), a small Windows app that shows information saved locally by Rust and Steam.
+
+The site is available in English and Russian.
+
+## Quick start
 
 ```sh
-npm create astro@latest -- --template minimal
+bun install
+bun run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Opens at `http://localhost:4321`.
 
-## 🚀 Project Structure
+## Build
 
-Inside of your Astro project, you'll see the following folders and files:
+```sh
+bun run build
+```
+
+Output goes to `dist/`.
+
+## Preview production build
+
+```sh
+bun run preview
+```
+
+## Project structure
 
 ```text
-/
-├── public/
+astro-front/
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── assets/          # images (icon, preview)
+│   ├── components/      # Astro components (Header, Hero, Features, Footer)
+│   ├── i18n/            # translations (en, ru)
+│   ├── layouts/         # HTML layout
+│   ├── pages/           # page routes
+│   ├── scripts/         # client-side scripts (lang redirect)
+│   └── styles/          # global CSS
+└── public/              # static files
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Deployment
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Pushing to `main` triggers the `deploy-astro-front.yml` workflow, which builds with Bun and deploys to GitHub Pages.

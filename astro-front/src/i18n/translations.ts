@@ -19,6 +19,7 @@ export const translations = {
     lightweight: 'Lightweight',
     lightweightDesc: 'Single .exe, tiny footprint, native Windows app. No Electron, no bloat.',
     footerText: 'Made with care by .insoulglobal',
+    previewAlt: 'Rust Password app preview',
     language: 'Русский',
   },
   ru: {
@@ -41,6 +42,7 @@ export const translations = {
     lightweight: 'Лёгкость',
     lightweightDesc: 'Один .exe, минимальный размер, нативное Windows-приложение. Без Electron, без лишнего.',
     footerText: 'Создано с заботой · .insoulglobal',
+    previewAlt: 'Превью приложения Rust Password',
     language: 'English',
   },
 } as const;

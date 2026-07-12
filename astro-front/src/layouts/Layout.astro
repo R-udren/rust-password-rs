@@ -1,11 +1,12 @@
 ---
 import '../styles/global.css';
 import iconSrc from '../assets/icon.png';
+import type { Locale } from '../i18n/translations';
 
 interface Props {
   title: string;
   description: string;
-  lang: string;
+  lang: Locale;
 }
 
 const { title, description, lang } = Astro.props;
@@ -42,7 +43,7 @@ const ogImage = new URL('/og.png', Astro.site);
       import '../scripts/i18n.ts';
     </script>
   </head>
-  <body class="min-h-screen antialiased" style="background-color: #0a0a0a; color: #fafafa;">
+  <body class="min-h-screen antialiased">
     <slot />
   </body>
 </html>
