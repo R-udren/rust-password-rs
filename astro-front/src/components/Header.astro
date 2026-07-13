@@ -40,4 +40,5 @@ const otherPath = lang === 'en' ? `${base}ru/` : base;
   .links a,.language,.download { transition: color 150ms ease,border-color 150ms ease,background 150ms ease; }
   .links a:hover,.language:hover { color: var(--text); }.download:hover { border-color: #45414c; background: #17171b; }
   @media (max-width: 760px) { .nav { grid-template-columns: 1fr auto; }.links,.language span { display: none; }.language { padding-inline: .5rem; }.download span { max-width: 9rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } }
+  @media (max-width: 560px) { .nav { min-height: 68px; }.brand span,.download span { display: none; }.brand-mark { width: 40px; height: 40px; }.actions { gap: .3rem; }.language { padding: .5rem; }.download { width: 42px; height: 42px; justify-content: center; padding: 0; } }
 </style>
